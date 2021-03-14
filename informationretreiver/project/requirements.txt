@@ -1,0 +1,11 @@
+re
+certifi
+urllib3
+bs4
+datetime
+glob
+os
+selenium
+time
+random
+collections
