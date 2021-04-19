@@ -7,7 +7,6 @@ import ScraperSpecificTools as sst
 import GeneralPurposeTools as gpt
 """
 General: Extendible quote request, suitable for frequent use (quick).
-
 return:dict with keys: [name, exchange, currency, price]
 """
 
@@ -17,7 +16,7 @@ class YahooQuoteInfoScraper(GenericScraper):
         self.yahooFunction = function
         self.data = None
         self.result = {}
-        super(GenericScraper, self).__init__()
+        super().__init__()
 
     def URLManufacture(self):
         return sst.YahooStaticDataURLManufacturer(self.ticker, self.yahooFunction)

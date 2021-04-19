@@ -24,7 +24,7 @@ class YahooFinanceStaticFinancialDataScraper(GenericScraper):
         self.yahooFunction = yahooFunction
         self.rowTuples = None
         self.dataAsDictionary = None
-        super(GenericScraper, self).__init__()
+        super().__init__()
 
     def URLManufacture(self):
         return sst.YahooStaticDataURLManufacturer(self.ticker, self.yahooFunction)
@@ -45,11 +45,11 @@ class YahooFinanceStaticFinancialDataScraper(GenericScraper):
         self.rowTuples = rowTuples
 
     def ProcessData(self):
-        self.dataAsDictionary = sst.PopulateKeyToValueAndBehaviorDictionary(self.rowTuples)
+        self.dataAsDictionary = sst.PopulateKeyToValueAndBehaviorDictionary(self.rowTuples, behaviorIsincluded=False)
     
     def Display(self):
         for key, value in self.dataAsDictionary.items():
-            print(key, value, len(value))
+            print(key, value)
 
     def Save(self):
         pass

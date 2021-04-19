@@ -42,9 +42,6 @@ def InfiniteScrollScraper(url, \
             lenOfPage += lenOfPageStep
     return browser.page_source
 
-    browser.delete_all_cookies()
-    browser.close()
-
 def ConstructYahooURL(ticker, \
                       function, \
                       yahooFuncType, countryCode=None, \
@@ -62,22 +59,6 @@ def ConstructYahooURL(ticker, \
     else:
         infoPage = infoPage + '?p=' + ticker
     return infoPage
-
-#Used for retreiving .csv data as string.
-def ConstructYahooHistoricalPriceSeriesURL(ticker, \
-                                          startDate, \
-                                          endDate, \
-                                          interval = '1d'):
-    URL = ''
-    downloadInstruction = 'https://query1.finance.yahoo.com/v7/finance/download/'
-    URL = downloadInstruction + ticker + '?'
-    period1 = str(int(startDate.timestamp()))
-    URL += 'period1=' + period1 + '&'
-    period2 = str(int(endDate.timestamp()))
-    URL += 'period2=' + period2 + '&'
-    URL += 'interval=' + interval + '&'
-    URL += 'events=history'
-    return URL
 
 #All patterns that are not acceptable as inputs.
 #Determines if input is NOT acceptable.
@@ -129,7 +110,7 @@ def FindFloatValue(valueString):
     try:
         val = float(valueString)
         return val, 'Floating Point Number'
-    except Exception as e:
+    except:
         pass
     return None, None
 
@@ -164,14 +145,14 @@ def FindAbsoluteNumberValue(valueString):
         lastDigit = valueString[-1]
         magnitudeDict = {'M':1e6, 'B':1e9, 'T':1e12}
         magnitude = magnitudeDict[lastDigit]
-    except Exception as e:
+    except:
         return None, None
     if not magnitude is None:
-        number, t = FindFloatValue(valueString[0:-1])
+        number, t_unused = FindFloatValue(valueString[0:-1])
         try:
             val = number*magnitude
             return val, 'AbsoluteNumber'
-        except Exception as e:
+        except:
             pass
     return None, None
 
@@ -199,7 +180,7 @@ def ConcludeValueAndBehaviorFromKey(key, \
     lastBehavior = None
     if keyValueBehaviourDictionary:
         try:
-            behavior = keyValueBehaviourDictionary[key]
+            behaviour = keyValueBehaviourDictionary[key]
             for valueString in relevantValuesList:
                 value, behaviorString = behaviour(valueString)
                 if value and behaviorString:
@@ -234,10 +215,7 @@ def valueStingFromValuesList(valuesList):
     print('Error in valueStingFromValuesList(valuesList): No acceptable value found')
     return None
 
-def PopulateKeyToValueAndBehaviorDictionary(parsedHtmlFile):
-    keyNotSet = True
-    valueNotset = True
-    validTitles = {}
+def PopulateKeyToValueAndBehaviorDictionary(parsedHtmlFile, behaviorIsincluded=False):
     resultsDictionary = {}
     for i in range(0,len(parsedHtmlFile)):
             indexValue = GeneralPurposeTools.RemoveHTMLTags(str(parsedHtmlFile[i]), s_splitString).split(s_splitString)
@@ -246,7 +224,11 @@ def PopulateKeyToValueAndBehaviorDictionary(parsedHtmlFile):
             if valueString:
                 valueToBehaviorList = ConcludeValueAndBehaviorFromKey(key, valueString, s_supportedBehaviorsFunctionsDict)
                 if valueToBehaviorList:
-                    resultsDictionary[key] = valueToBehaviorList
+                    if behaviorIsincluded:
+                        #If detailed behavior report is necessary
+                        resultsDictionary[key] = valueToBehaviorList
+                    else:
+                        resultsDictionary[key] = [valueItem[0] for valueItem in valueToBehaviorList]
     return resultsDictionary
 
 def YahooStaticDataURLManufacturer(ticker, \

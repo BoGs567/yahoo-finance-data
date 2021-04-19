@@ -5,13 +5,14 @@ import ScraperSpecificTools as sst
 
 """
 CHROMEDRIVER is needed for this scraper.
-Retreives price and dividend series. (slow option)
+Retreives price and dividend series. (slow)
 uses selenium test- framework to interact with webpage.
 
-return : div, price
+return : split, div, price
 """
 
-s_tagAndAttributeMatrix = [['tr', 'class', 'C($tertiaryColor) Fz(xs) Ta(end)'], ['tr', 'class', 'BdT Bdc($seperatorColor) Ta(end) Fz(s) Whs(nw)']]
+s_tagAndAttributeMatrix = [['tr', 'class', 'C($tertiaryColor) Fz(xs) Ta(end)'], \
+                            ['tr', 'class', 'BdT Bdc($seperatorColor) Ta(end) Fz(s) Whs(nw)']]
 
 class YahooFinanceTimeSeriesScraper(GenericScraper):
     def __init__(self, ticker, seriesType, startDate, endDate):
@@ -21,7 +22,7 @@ class YahooFinanceTimeSeriesScraper(GenericScraper):
         self.seriesType = seriesType
         self.soupItem = None
         self.timeSeries = None
-        super(GenericScraper, self).__init__()
+        super().__init__()
 
     def URLManufacture(self):
         url = None
@@ -44,7 +45,8 @@ class YahooFinanceTimeSeriesScraper(GenericScraper):
         pass
 
     def Display(self):
-        print(self.timeSeries)
+        for dictionaryItem in self.timeSeries:
+            print(dictionaryItem)
 
     def ProcessData(self):
         dataGridMatrix = []
