@@ -1,6 +1,5 @@
 import re
 import certifi
-#import urllib3
 from bs4 import BeautifulSoup
 import datetime
 #-------------------------------------------------#
