@@ -2,12 +2,19 @@ import datetime
 from YahooQuoteInfoScraper import YahooQuoteInfoScraper
 from YahooFinanceTimeSeriesScraper import YahooFinanceTimeSeriesScraper
 from YahooFinanceStaticFinancialDataScraper import YahooFinanceStaticFinancialDataScraper
+from YahooFinanceTimeSeriesByQueryScraper import YahooFinanceTimeSeriesByQueryScraper
 
 ticker = 'AAPL'#'AZELIO.ST'#'AAPL'
 
-startDate = datetime.datetime.strptime('2019-10-10', '%Y-%m-%d')
+startDate = datetime.datetime.strptime('2020-10-10', '%Y-%m-%d')
 endDate = datetime.datetime.strptime('2020-10-14', '%Y-%m-%d')
 
+yquoteTsScraper = YahooFinanceTimeSeriesByQueryScraper(ticker, 'quote',startTime = startDate, endTime = endDate, frequency = '1d')
+yquoteTsScraper.Retreive()
+yquoteTsScraper.ProcessData()
+yquoteTsScraper.Display()
+
+'''
 yqis = YahooQuoteInfoScraper(ticker, 'quote')
 yqis.Retreive()
 yqis.Scrape()
@@ -64,3 +71,4 @@ ysfds.Scrape()
 ysfds.ProcessData()
 ysfds.Display()
 ysfds.Save()
+'''

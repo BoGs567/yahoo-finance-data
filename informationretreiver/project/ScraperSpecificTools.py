@@ -2,7 +2,6 @@ import datetime
 import time
 import GeneralPurposeTools as GeneralPurposeTools
 from selenium import webdriver
-#from selenium.webdriver.chrome.options import Options
 import random
 import collections
 
