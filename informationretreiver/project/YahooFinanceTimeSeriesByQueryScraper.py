@@ -19,7 +19,7 @@ class YahooFinanceTimeSeriesByQueryScraper(GenericScraper):
         self.function = function
         self.startTime = str(int(startTime.timestamp()))
         self.endTime = str(int(endTime.timestamp()))
-        self.frequency = frequency #valid: '1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max' (Make control!)
+        self.frequency = frequency #valid: '1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max' (TODO: Make control!)
         self.data = None
         self.result = {}
         super().__init__()
@@ -35,30 +35,55 @@ class YahooFinanceTimeSeriesByQueryScraper(GenericScraper):
     def Retreive(self):
         url = self.URLManufacture()
         response = requests.get(url).json()
-        print(response)
         data = response['chart']['result']
-        print(data)
         if data:
             self.data = response['chart']['result'][0]
         else:
             self.data = None
             raise YahooQuoteException((response['chart']['error']['description']))
             
-
     def Scrape(self):
         pass
     
-    def ProcessData(self):
-        #TODO: Retreive dividends (also present under "events")
+    def ProcessEventTypeData(self, eventData, eventTypeKeys):
+        functionTypeData = eventData.get(self.function)
+        if functionTypeData:
+            for key, item in functionTypeData.items():
+                if item.get('date'):
+                    if self.result.get('timestamp'):
+                        self.result['timestamp'].append(item['date']*1000)
+                    else:
+                        self.result['timestamp']= [item['date']*1000]
+                for key in eventTypeKeys:
+                    if item.get(key):
+                        if self.result.get(key):
+                            self.result[key].append(item[key])
+                        else:
+                            self.result[key] = [(item[key])]
 
-        self.result = {
-            'timestamp': [x * 1000 for x in self.data['timestamp']],
-            'open': self.data['indicators'][self.function][0]['open'],
-            'high': self.data['indicators'][self.function][0]['high'],
-            'low': self.data['indicators'][self.function][0]['low'],
-            'close': self.data['indicators'][self.function][0]['close'],
-            'volume': self.data['indicators'][self.function][0]['volume']
-        }
+    def ProcessData(self):
+        if self.function == 'quote':
+            if self.data.get('timestamp'):
+                self.result['timestamp'] = [x * 1000 for x in self.data.get('timestamp')]
+            else:
+                return
+            indicatorDictionary = self.data.get('indicators')
+            if indicatorDictionary:
+                for key in ['close', 'open', 'low', 'high', 'volume']:
+                    res = indicatorDictionary[self.function][0].get(key)
+                    if res:
+                        self.result[key] = res
+                    else:
+                        raise YahooQuoteException('key: \"{0}\" is not present in response!'.format(key))
+        else:
+            events = self.data.get('events')
+            if events:
+                if self.function == 'dividends':
+                    self.ProcessEventTypeData(events, ['amount'])
+
+                elif self.function == 'splits':
+                    self.ProcessEventTypeData(events, ['numerator', 'denominator', 'splitRatio' ])
+        return
 
     def Display(self):
         for key,value in self.result.items():

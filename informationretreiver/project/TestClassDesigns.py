@@ -4,12 +4,14 @@ from YahooFinanceTimeSeriesScraper import YahooFinanceTimeSeriesScraper
 from YahooFinanceStaticFinancialDataScraper import YahooFinanceStaticFinancialDataScraper
 from YahooFinanceTimeSeriesByQueryScraper import YahooFinanceTimeSeriesByQueryScraper
 
+#TODO: Make scraper for Options, Bonds.
+
 ticker = 'AAPL'#'AZELIO.ST'#'AAPL'
 
-startDate = datetime.datetime.strptime('2020-10-10', '%Y-%m-%d')
-endDate = datetime.datetime.strptime('2020-10-14', '%Y-%m-%d')
+startDate = datetime.datetime.strptime('2020-01-01', '%Y-%m-%d')
+endDate = datetime.datetime.strptime('2021-04-01', '%Y-%m-%d')
 
-yquoteTsScraper = YahooFinanceTimeSeriesByQueryScraper(ticker, 'quote',startTime = startDate, endTime = endDate, frequency = '1d')
+yquoteTsScraper = YahooFinanceTimeSeriesByQueryScraper(ticker, 'splits', startTime = startDate, endTime = endDate, frequency = '1d')
 yquoteTsScraper.Retreive()
 yquoteTsScraper.ProcessData()
 yquoteTsScraper.Display()
