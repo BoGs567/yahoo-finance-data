@@ -16,7 +16,6 @@ yquoteTsScraper.Retreive()
 yquoteTsScraper.ProcessData()
 yquoteTsScraper.Display()
 
-'''
 yqis = YahooQuoteInfoScraper(ticker, 'quote')
 yqis.Retreive()
 yqis.Scrape()
@@ -73,4 +72,3 @@ ysfds.Scrape()
 ysfds.ProcessData()
 ysfds.Display()
 ysfds.Save()
-'''
