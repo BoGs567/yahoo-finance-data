@@ -1,4 +1,4 @@
-# yahoo-finance-data  (0.0.4, Alpha-version)
+# yahoo-finance-data  (Alpha-version)
 ## _The omnipotent Yahoo-Finance data retreiver_
 yahoo-finance-data is a package for the retreival of data from Yahoo Finance. It makes use of both scraping and query calls. The yahoo-finance-data package is intended to be simple to use. Its usage is summarized in two steps.
 - Create specialized data retreival objects
