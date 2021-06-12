@@ -1,0 +1,10 @@
+LICENCE.txt
+README.md
+setup.cfg
+setup.py
+yahoo_finance_data.egg-info/PKG-INFO
+yahoo_finance_data.egg-info/SOURCES.txt
+yahoo_finance_data.egg-info/dependency_links.txt
+yahoo_finance_data.egg-info/requires.txt
+yahoo_finance_data.egg-info/top_level.txt
+yfd/__init__.py

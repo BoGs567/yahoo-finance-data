@@ -1,4 +1,23 @@
-# yahoo-finance-data  (0.0.4, Alpha-version)
+Metadata-Version: 2.1
+Name: yahoo-finance-data
+Version: 0.0.4
+Summary: Retreive data (quote, historical, financial, statistics) from Yahoo Finance.
+Home-page: https://github.com/BoGs567/yahoo-finance-data
+Author: Sophocles
+Author-email: nikitidis567@gmail.com
+License: MIT
+Download-URL: https://github.com/BoGs567/yahoo-finance-data/archive/refs/tags/0.0.4.tar.gz
+Keywords: Yahoo,finance,data,scraper,Financial
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Description-Content-Type: text/markdown
+License-File: LICENCE.txt
+
+# yahoo-finance-data  (0.0.1, Alpha-version)
 ## _The omnipotent Yahoo-Finance data retreiver_
 yahoo-finance-data is a package for the retreival of data from Yahoo Finance. It makes use of both scraping and query calls. The yahoo-finance-data package is intended to be simple to use. Its usage is summarized in two steps.
 - Create specialized data retreival objects
@@ -68,3 +87,5 @@ MIT
    [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
    [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
    [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
+
+
