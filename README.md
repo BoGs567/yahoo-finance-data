@@ -7,6 +7,9 @@ yahoo-finance-data is a package for the retreival of data from Yahoo Finance. It
 ## Features
 The asset classes currently supported are: Stocks.
 In the future support will be added for Options, Bonds and Crypto.
+
+## Data Types
+The following data may be retreived.
 - Quote
 - Historical (price, dividends, splits)
 - Financials 
@@ -35,34 +38,6 @@ yahoo-finance-data uses a number of 3rd party projects:
 - [selenium] - Should be removed!
 
 yahoo-finance-data is itself an open source project with a [public repository][yfd] on GitHub.
-
-## Development
-
-Want to contribute? Great!
-
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantaneously see your updates!
-
-Open your favorite Terminal and run these commands.
-
-First Tab:
-
-```sh
-node app
-```
-
-Second Tab:
-
-```sh
-gulp watch
-```
-
-(optional) Third:
-
-```sh
-karma test
-```
-
 
 
 ## License

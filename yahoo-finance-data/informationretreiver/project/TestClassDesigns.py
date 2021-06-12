@@ -11,6 +11,17 @@ ticker = 'AAPL'#'AZELIO.ST'#'AAPL'
 startDate = datetime.datetime.strptime('2020-01-01', '%Y-%m-%d')
 endDate = datetime.datetime.strptime('2021-04-01', '%Y-%m-%d')
 
+
+yquoteTsScraper = YahooFinanceTimeSeriesByQueryScraper(ticker, 'quote', startTime = startDate, endTime = endDate, frequency = '1d')
+yquoteTsScraper.Retreive()
+yquoteTsScraper.ProcessData()
+yquoteTsScraper.Display()
+
+yquoteTsScraper = YahooFinanceTimeSeriesByQueryScraper(ticker, 'dividends', startTime = startDate, endTime = endDate, frequency = '1d')
+yquoteTsScraper.Retreive()
+yquoteTsScraper.ProcessData()
+yquoteTsScraper.Display()
+
 yquoteTsScraper = YahooFinanceTimeSeriesByQueryScraper(ticker, 'splits', startTime = startDate, endTime = endDate, frequency = '1d')
 yquoteTsScraper.Retreive()
 yquoteTsScraper.ProcessData()
@@ -22,7 +33,7 @@ yqis.Scrape()
 yqis.ProcessData()
 yqis.Display()
 yqis.Save()
-
+'''
 ytss = YahooFinanceTimeSeriesScraper(ticker = ticker, seriesType = "split", startDate = startDate, endDate = endDate)
 ytss.Retreive()
 ytss.Scrape()
@@ -43,7 +54,7 @@ ytss.Scrape()
 ytss.ProcessData()
 ytss.Display()
 ytss.Save()
-
+'''
 ysfds = YahooFinanceStaticFinancialDataScraper(ticker = ticker, yahooFunction = 'cash-flow')
 ysfds.Retreive()
 ysfds.Scrape()

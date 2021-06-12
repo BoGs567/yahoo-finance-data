@@ -7,8 +7,8 @@ setup(
   description = 'Retreive data (quote, historical, financial, statistics) from Yahoo Finance.',   # Give a short description about your library
   author = 'Sophocles',                   # Type in your name
   author_email = 'nikitidis567@gmail.com',      # Type in your E-Mail
-  url = 'https://github.com/BoGs567/Financial_Data_Base',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/BoGs567/Financial_Data_Base/archive/refs/tags/0.0.1.tar.gz',   
+  url = 'https://github.com/BoGs567/yahoo-finance-data',   # Provide either the link to your github or to your website
+  download_url = 'https://github.com/BoGs567/yahoo-finance-data/archive/refs/tags/0.0.1.tar.gz',   
   keywords = ['Yahoo', 'finance', 'data', 'scraper', 'Financial'],   # Keywords that define your package best
   install_requires=['certifi','urllib3','bs4','datetime','selenium',],
   classifiers=[

@@ -16,7 +16,7 @@ return:dict with keys:
 class YahooFinanceTimeSeriesByQueryScraper(GenericScraper):
     def __init__(self, ticker, function, startTime, endTime, frequency):
         self.ticker = ticker
-        self.function = function
+        self.function = function #Valid: 'quote', 'dividends', 'splits'
         self.startTime = str(int(startTime.timestamp()))
         self.endTime = str(int(endTime.timestamp()))
         self.frequency = frequency #valid: '1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max' (TODO: Make control!)
