@@ -20,7 +20,7 @@ setup(
   url = 'https://github.com/BoGs567/yahoo-finance-data',   # Provide either the link to your github or to your website
   download_url = 'https://github.com/BoGs567/yahoo-finance-data/archive/refs/tags/0.0.7.tar.gz',   
   keywords = ['Yahoo', 'finance', 'data', 'scraper', 'Financial'],   # Keywords that define your package best
-  install_requires=['certifi','urllib3','beautifulsoup4','datetime','selenium',],
+  install_requires=['requests','certifi','urllib3','beautifulsoup4','datetime','selenium',],
   classifiers=[
     'Development Status :: 3 - Alpha',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
     'Intended Audience :: Developers',      # Define that your audience are developers

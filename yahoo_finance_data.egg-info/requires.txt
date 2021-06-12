@@ -1,5 +1,6 @@
-certifi
-urllib3
 beautifulsoup4
+certifi
 datetime
+requests
 selenium
+urllib3
