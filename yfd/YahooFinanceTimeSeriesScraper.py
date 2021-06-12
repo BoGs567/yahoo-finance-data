@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.options import Options
-from GenericScraper import GenericScraper
-import ScraperSpecificTools as sst
+from yfd.GenericScraper import GenericScraper
+import yfd.ScraperSpecificTools as sst
 
 """
 CHROMEDRIVER is needed for this scraper.

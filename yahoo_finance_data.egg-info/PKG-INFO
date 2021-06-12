@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: yahoo-finance-data
-Version: 0.0.5
+Version: 0.0.6
 Summary: Retreive data (quote, historical, financial, statistics) from Yahoo Finance.
 Home-page: https://github.com/BoGs567/yahoo-finance-data
 Author: Sophocles
 Author-email: nikitidis567@gmail.com
 License: MIT
-Download-URL: https://github.com/BoGs567/yahoo-finance-data/archive/refs/tags/0.0.5.tar.gz
+Download-URL: https://github.com/BoGs567/yahoo-finance-data/archive/refs/tags/0.0.6.tar.gz
 Keywords: Yahoo,finance,data,scraper,Financial
 Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha

@@ -1,6 +1,6 @@
 import datetime
 import time
-import GeneralPurposeTools as GeneralPurposeTools
+import yfd.GeneralPurposeTools as GeneralPurposeTools
 from selenium import webdriver
 import random
 import collections

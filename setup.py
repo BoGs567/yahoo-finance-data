@@ -12,13 +12,13 @@ setup(
   packages=find_packages(exclude=["contrib", "docs", "tests*"]),
   long_description=long_description,
   long_description_content_type='text/markdown',
-  version = '0.0.6',      # Start with a small number and increase it with every change you make
+  version = '0.0.7',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'Retreive data (quote, historical, financial, statistics) from Yahoo Finance.',   # Give a short description about your library
   author = 'Sophocles',                   # Type in your name
   author_email = 'nikitidis567@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/BoGs567/yahoo-finance-data',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/BoGs567/yahoo-finance-data/archive/refs/tags/0.0.6.tar.gz',   
+  download_url = 'https://github.com/BoGs567/yahoo-finance-data/archive/refs/tags/0.0.7.tar.gz',   
   keywords = ['Yahoo', 'finance', 'data', 'scraper', 'Financial'],   # Keywords that define your package best
   install_requires=['certifi','urllib3','beautifulsoup4','datetime','selenium',],
   classifiers=[

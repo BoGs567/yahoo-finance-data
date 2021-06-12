@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 import urllib3
 import certifi
-from GenericScraper import GenericScraper
-import ScraperSpecificTools as sst
+from yfd.GenericScraper import GenericScraper
+import yfd.ScraperSpecificTools as sst
 
 #TODO: Make it possible to dynamically retreive tag codes (div tag code -> 'D(tbr) fi-row Bgc($hoverBgColor):h' etc.)
 #TODO: Quarterly data! (selenium?)

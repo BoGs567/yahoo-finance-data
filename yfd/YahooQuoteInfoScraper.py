@@ -2,9 +2,9 @@ from bs4 import BeautifulSoup
 import urllib3
 import certifi
 
-from GenericScraper import GenericScraper
-import ScraperSpecificTools as sst
-import GeneralPurposeTools as gpt
+from yfd.GenericScraper import GenericScraper
+import yfd.ScraperSpecificTools as sst
+import yfd.GeneralPurposeTools as gpt
 """
 General: Extendible quote request, suitable for frequent use (quick).
 return:dict with keys: [name, exchange, currency, price]

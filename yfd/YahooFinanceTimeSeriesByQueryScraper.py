@@ -1,11 +1,11 @@
 #https://query1.finance.yahoo.com/v8/finance/chart/AAPL?symbol=AAPL&period1=1587494216&period2=1619030216&interval=1d&includePrePost=true&events=div%7Csplit%7Cearn&lang=en-US&region=US&crumb=t5QZMhgytYZ&corsDomain=finance.yahoo.com
 
 import requests
-from GenericScraper import GenericScraper
-import ScraperSpecificTools as sst
-import GeneralPurposeTools as gpt
+from yfd.GenericScraper import GenericScraper
+import yfd.ScraperSpecificTools as sst
+import yfd.GeneralPurposeTools as gpt
 
-from YahooFinanceExceptions import YahooQuoteException #TODO: Make sure YahooQuoteException is implemented correctly!
+from yfd.YahooFinanceExceptions import YahooQuoteException #TODO: Make sure YahooQuoteException is implemented correctly!
 
 """
 General: Extendible time period request, suitable for frequent use (quick).

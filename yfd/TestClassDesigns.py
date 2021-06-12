@@ -1,8 +1,8 @@
 import datetime
-from YahooQuoteInfoScraper import YahooQuoteInfoScraper
-from YahooFinanceTimeSeriesScraper import YahooFinanceTimeSeriesScraper
-from YahooFinanceStaticFinancialDataScraper import YahooFinanceStaticFinancialDataScraper
-from YahooFinanceTimeSeriesByQueryScraper import YahooFinanceTimeSeriesByQueryScraper
+from yfd.YahooQuoteInfoScraper import YahooQuoteInfoScraper
+from yfd.YahooFinanceTimeSeriesScraper import YahooFinanceTimeSeriesScraper
+from yfd.YahooFinanceStaticFinancialDataScraper import YahooFinanceStaticFinancialDataScraper
+from yfd.YahooFinanceTimeSeriesByQueryScraper import YahooFinanceTimeSeriesByQueryScraper
 
 #TODO: Make scraper for Options, Bonds.
 
