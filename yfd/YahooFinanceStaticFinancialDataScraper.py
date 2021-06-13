@@ -20,11 +20,11 @@ s_tagByFunctionDict = {
 
 class YahooFinanceStaticFinancialDataScraper(GenericScraper):
     def __init__(self, ticker, yahooFunction):
-        self.ticker = ticker
+        #self.ticker = ticker
         self.yahooFunction = yahooFunction
         self.rowTuples = None
-        self.dataAsDictionary = None
-        super().__init__()
+        self.pageData = None
+        super().__init__(ticker)
 
     def URLManufacture(self):
         return sst.YahooStaticDataURLManufacturer(self.ticker, self.yahooFunction)
@@ -33,23 +33,23 @@ class YahooFinanceStaticFinancialDataScraper(GenericScraper):
         URL = self.URLManufacture()
         page = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where()).request('GET',URL)
         soup = BeautifulSoup(page.data, 'html.parser')
-        self.data = soup
+        self.pageData = soup
     
     def Scrape(self):
-        assert self.data, "No Data Retreived"
+        assert self.pageData, "No Data Retreived"
         rowTuples = []
         for key in s_tagByFunctionDict[self.yahooFunction].keys():
-            rowTupleItem = self.data.find_all(s_tagByFunctionDict[self.yahooFunction][key][0], class_= s_tagByFunctionDict[self.yahooFunction][key][1])
+            rowTupleItem = self.pageData.find_all(s_tagByFunctionDict[self.yahooFunction][key][0], class_= s_tagByFunctionDict[self.yahooFunction][key][1])
             assert rowTupleItem, "Error In Scraper for Row Tuple"
             rowTuples.extend(rowTupleItem)
         self.rowTuples = rowTuples
 
     def ProcessData(self):
-        self.dataAsDictionary = sst.PopulateKeyToValueAndBehaviorDictionary(self.rowTuples, behaviorIsincluded=False)
-    
-    def Display(self):
-        for key, value in self.dataAsDictionary.items():
-            print(key, value)
+        self.result = sst.PopulateKeyToValueAndBehaviorDictionary(self.rowTuples, behaviorIsincluded=False)
 
+    def Display(self):
+        for key, value in self.result.items():
+            print(key, value)
+    
     def Save(self):
         pass

@@ -15,14 +15,13 @@ return:dict with keys:
 
 class YahooFinanceTimeSeriesByQueryScraper(GenericScraper):
     def __init__(self, ticker, function, startTime, endTime, frequency):
-        self.ticker = ticker
+        #self.ticker = ticker
         self.function = function #Valid: 'quote', 'dividends', 'splits'
         self.startTime = str(int(startTime.timestamp()))
         self.endTime = str(int(endTime.timestamp()))
         self.frequency = frequency #valid: '1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max' (TODO: Make control!)
-        self.data = None
-        self.result = {}
-        super().__init__()
+        self.jsonResponseData = None#change name!
+        super().__init__(ticker)
 
     def URLManufacture(self):
         return (
@@ -37,9 +36,8 @@ class YahooFinanceTimeSeriesByQueryScraper(GenericScraper):
         response = requests.get(url).json()
         data = response['chart']['result']
         if data:
-            self.data = response['chart']['result'][0]
+            self.jsonResponseData = response['chart']['result'][0]
         else:
-            self.data = None
             raise YahooQuoteException((response['chart']['error']['description']))
             
     def Scrape(self):
@@ -63,11 +61,11 @@ class YahooFinanceTimeSeriesByQueryScraper(GenericScraper):
 
     def ProcessData(self):
         if self.function == 'quote':
-            if self.data.get('timestamp'):
-                self.result['timestamp'] = [x * 1000 for x in self.data.get('timestamp')]
+            if self.jsonResponseData.get('timestamp'):
+                self.result['timestamp'] = [x * 1000 for x in self.jsonResponseData.get('timestamp')]
             else:
                 return
-            indicatorDictionary = self.data.get('indicators')
+            indicatorDictionary = self.jsonResponseData.get('indicators')
             if indicatorDictionary:
                 for key in ['close', 'open', 'low', 'high', 'volume']:
                     res = indicatorDictionary[self.function][0].get(key)
@@ -76,7 +74,7 @@ class YahooFinanceTimeSeriesByQueryScraper(GenericScraper):
                     else:
                         raise YahooQuoteException('key: \"{0}\" is not present in response!'.format(key))
         else:
-            events = self.data.get('events')
+            events = self.jsonResponseData.get('events')
             if events:
                 if self.function == 'dividends':
                     self.ProcessEventTypeData(events, ['amount'])

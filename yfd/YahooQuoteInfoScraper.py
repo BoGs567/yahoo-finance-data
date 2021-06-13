@@ -12,11 +12,10 @@ return:dict with keys: [name, exchange, currency, price]
 
 class YahooQuoteInfoScraper(GenericScraper):
     def __init__(self, ticker, function):
-        self.ticker = ticker
+        #self.ticker = ticker
         self.yahooFunction = function
-        self.data = None
-        self.result = {}
-        super().__init__()
+        self.pageData = None
+        super().__init__(ticker)
 
     def URLManufacture(self):
         return sst.YahooStaticDataURLManufacturer(self.ticker, self.yahooFunction)
@@ -25,11 +24,11 @@ class YahooQuoteInfoScraper(GenericScraper):
         URL = self.URLManufacture()
         page = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where()).request('GET',URL)
         soup = BeautifulSoup(page.data, 'html.parser')
-        self.data = soup
+        self.pageData = soup
     
     def ScrapeName(self):
-        assert self.data
-        name_struct = self.data.findAll('h1', attrs={'class': 'D(ib) Fz(18px)'})
+        assert self.pageData
+        name_struct = self.pageData.findAll('h1', attrs={'class': 'D(ib) Fz(18px)'})
         if name_struct:
             name = None 
             for item in name_struct:
@@ -38,8 +37,8 @@ class YahooQuoteInfoScraper(GenericScraper):
             self.result['name'] = name
 
     def ScrapeExchangeInformation(self):
-        assert self.data
-        exc_curr_struct = self.data.findAll('div', attrs={'class': 'C($tertiaryColor) Fz(12px)'})
+        assert self.pageData
+        exc_curr_struct = self.pageData.findAll('div', attrs={'class': 'C($tertiaryColor) Fz(12px)'})
         if exc_curr_struct:
             for item in exc_curr_struct:
                 codeString = gpt.RemoveHTMLTags(str(item))
@@ -54,8 +53,8 @@ class YahooQuoteInfoScraper(GenericScraper):
             self.result['currency'] = currency
 
     def ScrapePriceInformation(self):
-        assert self.data
-        price_struct = self.data.findAll('span', attrs={'class': 'Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)'})
+        assert self.pageData
+        price_struct = self.pageData.findAll('span', attrs={'class': 'Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)'})
         price = None
         if price_struct:
             price = gpt.RemoveHTMLTags(str(price_struct[0]))
