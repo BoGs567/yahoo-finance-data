@@ -1,6 +1,0 @@
-beautifulsoup4
-certifi
-datetime
-requests
-selenium
-urllib3
