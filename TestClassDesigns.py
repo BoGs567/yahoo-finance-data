@@ -23,10 +23,11 @@ YahooFinanceTimeSeriesByQueryScraper - test
 '''
 yahooFunctions = ['quote', 'dividends', 'splits']
 for yahooFunction_ in yahooFunctions:
-    ysfds = YahooFinanceTimeSeriesByQueryScraper(ticker, yahooFunction_, startTime = startDate, endTime = endDate, frequency = '1d')
+    ysfds = YahooFinanceTimeSeriesByQueryScraper(ticker, yahooFunction_, startTime = startDate, endTime = endDate, frequency = '5d')
     ysfds.GetData()
     status = False
     if ysfds.GetResult():
+        #ysfds.Display()
         status = True
     message = 'YahooFinanceTimeSeriesByQueryScraper:'+yahooFunction_+':'+ticker
     LogResult(message, status)
