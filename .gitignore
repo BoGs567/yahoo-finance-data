@@ -1,5 +1,6 @@
 *.pyc
-MANIFEST
-setup.cfg
-dist/*
+.MANIFEST
+*.cfg
+dist/
+dist/**
 *.egg-info
