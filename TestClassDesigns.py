@@ -1,6 +1,5 @@
 import datetime
 from yfd.YahooQuoteInfoScraper import YahooQuoteInfoScraper
-from yfd.YahooFinanceTimeSeriesScraper import YahooFinanceTimeSeriesScraper
 from yfd.YahooFinanceStaticFinancialDataScraper import YahooFinanceStaticFinancialDataScraper
 from yfd.YahooFinanceTimeSeriesByQueryScraper import YahooFinanceTimeSeriesByQueryScraper
 
@@ -33,28 +32,7 @@ yqis.Scrape()
 yqis.ProcessData()
 yqis.Display()
 yqis.Save()
-'''
-ytss = YahooFinanceTimeSeriesScraper(ticker = ticker, seriesType = "split", startDate = startDate, endDate = endDate)
-ytss.Retreive()
-ytss.Scrape()
-ytss.ProcessData()
-ytss.Display()
-ytss.Save()
 
-ytss = YahooFinanceTimeSeriesScraper(ticker = ticker, seriesType = "div", startDate = startDate, endDate = endDate)
-ytss.Retreive()
-ytss.Scrape()
-ytss.ProcessData()
-ytss.Display()
-ytss.Save()
-
-ytss = YahooFinanceTimeSeriesScraper(ticker = ticker, seriesType = "quote", startDate = startDate, endDate = endDate)
-ytss.Retreive()
-ytss.Scrape()
-ytss.ProcessData()
-ytss.Display()
-ytss.Save()
-'''
 ysfds = YahooFinanceStaticFinancialDataScraper(ticker = ticker, yahooFunction = 'cash-flow')
 ysfds.Retreive()
 ysfds.Scrape()

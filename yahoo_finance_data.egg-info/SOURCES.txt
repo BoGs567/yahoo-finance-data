@@ -15,6 +15,5 @@ yfd/TestClassDesigns.py
 yfd/YahooFinanceExceptions.py
 yfd/YahooFinanceStaticFinancialDataScraper.py
 yfd/YahooFinanceTimeSeriesByQueryScraper.py
-yfd/YahooFinanceTimeSeriesScraper.py
 yfd/YahooQuoteInfoScraper.py
 yfd/__init__.py

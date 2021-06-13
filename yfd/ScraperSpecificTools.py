@@ -1,63 +1,10 @@
 import datetime
 import time
 import yfd.GeneralPurposeTools as GeneralPurposeTools
-from selenium import webdriver
 import random
 import collections
 
 s_splitString = '*1*!*2*1*!*3*2*1*!'
-
-#Scraper may be used to retreive historical data series from YahooFinance.
-def InfiniteScrollScraper(url, \
-                            chromeOptions, \
-                            promptedAtAccess = False, \
-                            maxIterations = 4):
-    browser = webdriver.Chrome(chrome_options=chromeOptions)
-    browser.get(url)
-    time.sleep(1)
-    if promptedAtAccess:
-        try:
-            browser.find_element_by_name('agree').click()
-        except:
-            pass
-
-    lenOfPageStep = browser.execute_script("window.scrollTo(0, document.body.scrollHeight);var lenOfPageStep=document.body.scrollHeight;return lenOfPageStep;")
-    time.sleep(1)
-
-    lenOfPage = 0
-    tmpSourceLength = 0
-    iterator = 0
-    while(True):
-            time.sleep(0.25 + random.randint(1,20)/50)
-            browser.execute_script("window.scrollBy(0, "+ str(lenOfPage + lenOfPageStep) +");")
-
-            if tmpSourceLength >= len(browser.page_source):
-                iterator += 1
-
-            if iterator > maxIterations:
-                break
-
-            tmpSourceLength =len(browser.page_source)
-            lenOfPage += lenOfPageStep
-    return browser.page_source
-
-def ConstructYahooURL(ticker, \
-                      function, \
-                      yahooFuncType, countryCode=None, \
-                      startDate = datetime.datetime.strptime('1980-01-01', '%Y-%m-%d'), \
-                      endDate = datetime.datetime.now(), \
-                      interval = '1d', \
-                      filterInput = 'history'):
-    infoPage = 'https://finance.yahoo.com/' + function + '/' + ticker + '/' + yahooFuncType
-    if yahooFuncType == 'history':
-        infoPage = infoPage + '?period1=' + \
-        str(int(startDate.timestamp())) + \
-        '&period2=' + str(int(endDate.timestamp())) + \
-        '&interval=' + interval + '&filter=' + filterInput + '&frequency=' + \
-        interval
-    else:
-        infoPage = infoPage + '?p=' + ticker
-    return infoPage
 
 #All patterns that are not acceptable as inputs.
 #Determines if input is NOT acceptable.
@@ -234,18 +181,3 @@ def YahooStaticDataURLManufacturer(ticker, \
                                     yahooFunction):
     URL = 'https://finance.yahoo.com/quote/'+ ticker +'/'+ yahooFunction +'?p='+ ticker+ '&.tsrc=fin-srch'
     return URL
-
-def MakeTimeSeriesDateAndClose(headersDataRow, gridDataRows):
-    timeSeriesDateAndClose = []
-    headers = GeneralPurposeTools.RemoveHTMLTags(str(headersDataRow), s_splitString)
-    headers = headers.split(s_splitString)
-    headers = GeneralPurposeTools.CleanHeaders(headers)
-    for row in gridDataRows:
-        tmpString = GeneralPurposeTools.RemoveHTMLTags(str(row), s_splitString)
-        tmpStringToList = tmpString.split(s_splitString)
-        tmpStringToList = GeneralPurposeTools.ListRemoveUnsupportedDataTypes(tmpStringToList, s_supportedBehaviorsFunctionsDict)
-        res = {}
-        for idx, rowItem in enumerate(tmpStringToList):
-            res[headers[idx]] = rowItem
-        timeSeriesDateAndClose.append(res)
-    return timeSeriesDateAndClose
