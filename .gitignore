@@ -1,1 +1,5 @@
 *.pyc
+MANIFEST
+setup.cfg
+dist/*
+*.egg-info
