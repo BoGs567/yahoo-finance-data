@@ -1,7 +1,7 @@
 import re
 import certifi
 from bs4 import BeautifulSoup
-import datetime
+from datetime import datetime, timezone, timedelta
 #-------------------------------------------------#
 
 
@@ -12,9 +12,10 @@ def RemoveHTMLTags(text, \
     return re.sub(clean, separator, text)
 
 def StandardDateFromAmericanFormat(AmericanFormatedDate, \
-                                   inputFormat = '%b %d, %Y', \
-                                   outPutFormat = '%Y-%m-%d' ):
-    return datetime.datetime.strptime(AmericanFormatedDate,inputFormat).strftime(outPutFormat)
+                                   inputFormat = '%b %d, %Y'):
+    dt = datetime.strptime(AmericanFormatedDate,inputFormat)
+    timeStamp = dt.replace(tzinfo=timezone.utc).timestamp()
+    return round(timeStamp)
 
 def ListRemoveUnsupportedDataTypes(listInput, behaviourFuncs):
     list_ = []

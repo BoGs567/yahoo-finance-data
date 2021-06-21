@@ -10,7 +10,6 @@ ticker = 'AAPL'
 startDate = datetime.strptime('2020-01-01', '%Y-%m-%d')
 endDate = datetime.strptime('2021-04-01', '%Y-%m-%d')
 
-
 def LogResult(message, status):
     if status:
         logging.info(message + '-> OK')
@@ -27,21 +26,9 @@ for yahooFunction_ in yahooFunctions:
     ysfds.GetData()
     status = False
     if ysfds.GetResult():
-        #ysfds.Display()
         status = True
     message = 'YahooFinanceTimeSeriesByQueryScraper:'+yahooFunction_+':'+ticker
     LogResult(message, status)
-
-'''
-YahooQuoteInfoScraper - test
-'''
-yqis = YahooQuoteInfoScraper(ticker, 'quote')
-yqis.GetData()
-status = False
-if yqis.GetResult():
-    status = True
-message = 'YahooQuoteInfoScraper:'+'quote'+':'+ticker
-LogResult(message, status)
 
 '''
 YahooFinanceStaticFinancialDataScraper - test
@@ -56,3 +43,14 @@ for yahooFunction_ in yahooFunctions:
     
     message = 'YahooFinanceStaticFinancialDataScraper:'+yahooFunction_+':'+ticker
     LogResult(message, status)
+
+'''
+YahooQuoteInfoScraper - test
+'''
+yqis = YahooQuoteInfoScraper(ticker, 'quote')
+yqis.GetData()
+status = False
+if yqis.GetResult():
+    status = True
+message = 'YahooQuoteInfoScraper:'+'quote'+':'+ticker
+LogResult(message, status)

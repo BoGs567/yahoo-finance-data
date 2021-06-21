@@ -3,6 +3,7 @@ import time
 import yfd.GeneralPurposeTools as GeneralPurposeTools
 import random
 import collections
+import logging
 
 s_splitString = '*1*!*2*1*!*3*2*1*!'
 
@@ -61,18 +62,23 @@ def FindFloatValue(valueString):
     return None, None
 
 def FindDateValue(valueString):
+    date = None
+    valueType = None
+
     if valueString in ['ttm', 'Current']:
-        return valueString, 'Date'
-    format = GeneralPurposeTools.DateFormatFromDateString(valueString)
-    try:
-        if format:
-            date = GeneralPurposeTools.StandardDateFromAmericanFormat(valueString, format)
-        else:
-            date = GeneralPurposeTools.StandardDateFromAmericanFormat(valueString)
-        return date, 'Date' 
-    except:
-        pass
-    return None, None
+        date = round(time.time())
+        valueType = 'Date'
+    if not date:
+        try:
+            format = GeneralPurposeTools.DateFormatFromDateString(valueString)
+            if format:
+                date = GeneralPurposeTools.StandardDateFromAmericanFormat(valueString, format)
+            else:
+                date = GeneralPurposeTools.StandardDateFromAmericanFormat(valueString)
+            valueType = 'Date' 
+        except:
+            pass
+    return date, valueType
 
 def FindFinancialRowDoubleValue(valueString):
     try:
@@ -132,8 +138,8 @@ def ConcludeValueAndBehaviorFromKey(key, \
                 if value and behaviorString:
                     behaviorToValueList.append((value, behaviorString)) 
         except Exception as e:
-            print('Unable to retreive behaviour from dictionary \nError Message: ', e)
-            print('Processing behavior matching algorithm')
+            logging.error('Unable to retreive behaviour from dictionary \nError Message: ', e)
+            logging.error('Processing behavior matching algorithm')
     else:
         if not relevantValuesList:
                 return []
@@ -158,7 +164,7 @@ def valueStingFromValuesList(valuesList):
 
     if relevantValuesList:
         return relevantValuesList
-    print('Error in valueStingFromValuesList(valuesList): No acceptable value found')
+    logging.error('Error in valueStingFromValuesList(valuesList): No acceptable value found')
     return None
 
 def PopulateKeyToValueAndBehaviorDictionary(parsedHtmlFile, behaviorIsincluded=False):

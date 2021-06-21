@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import urllib3
 import certifi
+import time
 
 from yfd.GenericScraper import GenericScraper
 import yfd.ScraperSpecificTools as sst
@@ -61,11 +62,20 @@ class YahooQuoteInfoScraper(GenericScraper):
             price = float(price)
 
             self.result['price'] = price
+    
+    def TimeStamp(self):
+        tStamp = round(time.time())
+        if tStamp:
+            self.result['timestamp'] = tStamp
+        else:
+            self.result['timestamp'] = None
+
 
     def Scrape(self):
         self.ScrapeName()
         self.ScrapeExchangeInformation()
         self.ScrapePriceInformation()
+        self.TimeStamp()
 
     def ProcessData(self):
         pass
